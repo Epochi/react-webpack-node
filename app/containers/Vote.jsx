@@ -11,13 +11,7 @@ import styles from 'css/components/vote';
 
 const cx = classNames.bind(styles);
 
-class Vote extends Component {
-
-  //Data that needs to be called before rendering the component
-  //This is used for server side rending via the fetchComponentDataBeforeRender() method
-  static need = [  // eslint-disable-line
-    fetchTopics
-  ]
+class VoteContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -73,7 +67,7 @@ class Vote extends Component {
   }
 }
 
-Vote.propTypes = {
+VoteContainer.propTypes = {
   topics: PropTypes.array.isRequired,
   newTopic: PropTypes.string,
   dispatch: PropTypes.func.isRequired
@@ -88,4 +82,13 @@ function mapStateToProps(state) {
 
 // Read more about where to place `connect` here:
 // https://github.com/rackt/react-redux/issues/75#issuecomment-135436563
-export default connect(mapStateToProps)(Vote);
+
+const Vote = connect(mapStateToProps)(VoteContainer);
+
+//Data that needs to be called before rendering the component
+//This is used for server side rending via the fetchComponentDataBeforeRender() method
+//Moved the static 'need' to connect wrapper, so initial render doesn't duplicate calls 
+Vote.need =[
+  fetchTopics
+];
+export default Vote;

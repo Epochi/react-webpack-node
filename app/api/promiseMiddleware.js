@@ -3,7 +3,7 @@
 * As seen in: https://github.com/erikras/react-redux-universal-hot-example/blob/master/src/redux/middleware/clientMiddleware.js
 * 
 * This passes all actions with 'promise' to be used by client, which is custom axios instance
-* 
+* Functions called by makeTopicRequest and makeUserRequest are working as intended, because they just don't accept 'client' as argument
 */
 <<<<<<< cfc092ce0e278ad34ed88c597dc39be8a5436836
 
