@@ -7,6 +7,7 @@ import createRoutes from 'routes';
 import configureStore from 'store/configureStore';
 import headconfig from 'components/Meta';
 import { fetchComponentDataBeforeRender } from 'api/fetchComponentDataBeforeRender';
+import ApiServer from 'api/ApiServer';
 
 const clientConfig = {
   host: process.env.HOSTNAME || 'localhost',
@@ -58,6 +59,8 @@ function renderFullPage(renderedContent, initialState, head={
 export default function render(req, res) {
     const history = createMemoryHistory();
     const authenticated = req.isAuthenticated();
+    //we set cookie interceptors when the render happens
+    const client = ApiServer(req, authenticated);
     const store = configureStore({
       user: {
         authenticated,
@@ -65,7 +68,7 @@ export default function render(req, res) {
         message: '',
         isLogin: true
       }
-    }, history);
+    }, history, client);
 
     const routes = createRoutes(store);
 

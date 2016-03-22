@@ -122,10 +122,15 @@ export function createTopic(text) {
 }
 
 // Fetch posts logic
+
+//To be able to intercept requests universally
+//with axios we need to create seperate 
+//axios instances, we can do that by  
+//creating the calls inside middleware
 export function fetchTopics() {
   return {
     type: types.GET_TOPICS,
-    promise: makeTopicRequest('get')
+    promise:(client) => client.get('/topic')
   };
 }
 
