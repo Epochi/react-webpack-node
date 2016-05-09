@@ -57,6 +57,7 @@ function renderFullPage(renderedContent, initialState, head={
  * and pass it into the Router.run function.
  */
 export default function render(req, res) {
+    console.log('this is render');
     const history = createMemoryHistory();
     const authenticated = req.isAuthenticated();
     //we set cookie interceptors when the render happens
@@ -104,7 +105,7 @@ export default function render(req, res) {
             <RouterContext {...renderProps} />
         </Provider>
       );
-
+      console.log('this is match')
       // This method waits for all render component promises to resolve before returning to browser
       fetchComponentDataBeforeRender(store.dispatch, renderProps.components, renderProps.params)
       .then(() => {

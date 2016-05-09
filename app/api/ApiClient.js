@@ -3,9 +3,9 @@ import axios from 'axios';
 
 
 function api(){
+  console.log('ApiClient intercept');
   const client = axios.create({
-    //Set baseURL to what the user will be accessing
-    baseURL: `https://react-webpack-node.c9users.io`
+    baseURL:`http://${process.env.HOSTNAME || "localhost"}:${process.env.PORT || "3000"}`
   });
   
   
